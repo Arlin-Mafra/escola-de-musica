@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Cadastro de curso</title>
+</h:head>
+
+<h:body>
+	<h:form id="form-curso">
+		<p:growl />
+		<p:panel header="Cadastro de Cursos" style="width:60%">
+			<p:panelGrid columns="2">
+				<h:outputLabel value="Nome" />
+				<p:inputText value="#{cursoBean.curso.nome}" required="true"
+					requiredMessage="O nome é obrigatório!" />
+				<h:outputLabel value="Descrição" />
+				<p:inputTextarea value="#{cursoBean.curso.descricao}" cols="40"
+					rows="3" />
+				<h:outputLabel value="Duração" />
+				<p:spinner min="1" stepFactor="0.5" size="1"
+					value="#{cursoBean.curso.duracao}" required="true"
+					requiredMessage="A duração é obrigatória!" />
+				<h:outputLabel value="Tipo" />
+				<p:selectOneMenu value="#{cursoBean.curso.tipos}" required="true">
+					<f:selectItem itemLabel="::Selecione::" itemValue="#{null}" />
+					<f:selectItems value="#{cursoBean.tipos}" var="tipo"
+						itemLabel="#{tipo.label}" itemValue="#{tipo}" />
+				</p:selectOneMenu>
+				<h:outputLabel value="Data de Criação" />
+				<p:calendar value="#{cursoBean.curso.dataDeCriacao}" required="true"
+					requiredMessage="A data é obrigatória!" pattern="dd/MM/yyyy"
+					mindate="#{cursoBean.dataAtual}" maxdate="#{cursoBean.dataAtual}" />
+			</p:panelGrid>
+			<br />
+			<p:commandButton icon="ui-icon-disk" value="Salvar" action="#{cursoBean.salvar}"
+				update="@form" />
+		</p:panel>
+	</h:form>
+</h:body>
+</html>
